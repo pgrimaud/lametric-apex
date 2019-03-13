@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Apex\\": "src/Apex"
+    }
+  },
+  "require": {
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
