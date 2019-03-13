@@ -89,7 +89,7 @@ class Api
         foreach ($data->data->stats as $stat) {
             $name = strtolower($stat->metadata->name);
             if ($name === 'level') {
-                $dataToReturn[$name] = $name . ' ' . $stat->value;
+                $dataToReturn[$name] = 'LVL ' . $stat->value;
             } else {
                 $dataToReturn[$name] = $stat->value . ' ' . $name;
             }
