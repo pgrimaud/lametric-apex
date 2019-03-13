@@ -52,7 +52,6 @@ class Api
         $platform = self::PLATFORMS[$this->validator->getParameters()['platform']];
 
         try {
-
             $endpoint = 'https://public-api.tracker.gg/apex/v1/standard/profile/' .
                 $platform . '/' .
                 $this->validator->getParameters()['player'];
@@ -66,7 +65,6 @@ class Api
 
             $json = (string)$res->getBody();
             $data = json_decode($json);
-
         } catch (\Exception $e) {
             throw new MissingParameterException($e->getMessage());
         } catch (GuzzleException $e) {
