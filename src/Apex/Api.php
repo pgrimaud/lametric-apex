@@ -53,7 +53,7 @@ class Api
 
         try {
 
-            $endpoint = 'https://public-api.tracker.gg/apex/v1/standard/profile' .
+            $endpoint = 'https://public-api.tracker.gg/apex/v1/standard/profile/' .
                 $platform . '/' .
                 $this->validator->getParameters()['player'];
 
