@@ -56,6 +56,19 @@ class Response
             'icon'  => self::ICON
         ];
 
+        $i = 2;
+
+        foreach (['headshots', 'damage', 'rank score'] as $stat) {
+            if (isset($data[$stat])) {
+                $frames['frames'][] = [
+                    'index' => $i++,
+                    'text'  => $data[$stat],
+                    'icon'  => self::ICON
+                ];
+            }
+        }
+
+
         return $this->asJson($frames);
     }
 

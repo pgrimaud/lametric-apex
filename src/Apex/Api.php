@@ -2,9 +2,7 @@
 
 namespace Apex;
 
-use Apex\Exception\ConfigException;
-use Apex\Exception\InternalErrorException;
-use Apex\Exception\MissingParameterException;
+use Apex\Exception\{ConfigException, InternalErrorException, MissingParameterException};
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -86,10 +84,19 @@ class Api
 
         foreach ($data->data->stats as $stat) {
             $name = strtolower($stat->metadata->name);
-            if ($name === 'level') {
-                $dataToReturn[$name] = 'LVL ' . $stat->value;
-            } else {
-                $dataToReturn[$name] = $stat->value . ' ' . $name;
+
+            switch ($name) {
+                case 'level':
+                    $dataToReturn[$name] = 'LVL ' . $stat->value;
+                    break;
+                case 'headshots':
+                    $dataToReturn[$name] = $stat->value . ' HS';
+                    break;
+                case 'kills':
+                case 'damage':
+                case 'rank score':
+                    $dataToReturn[$name] = $stat->value . ' ' . $name;
+                    break;
             }
         }
 
