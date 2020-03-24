@@ -61,7 +61,7 @@ class Response
         foreach (['headshots', 'damage', 'rank score'] as $stat) {
             if (isset($data[$stat])) {
                 $frames['frames'][] = [
-                    'index' => $i++,
+                    'index' => ++$i,
                     'text'  => $data[$stat],
                     'icon'  => self::ICON
                 ];
