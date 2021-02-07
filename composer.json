@@ -5,8 +5,8 @@
     }
   },
   "require": {
+    "php": ">=8.0",
     "ext-json": "*",
-    "php": ">=7.2",
     "guzzlehttp/guzzle": "^6.3"
   }
 }

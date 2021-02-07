@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Apex;
 
 use Apex\Exception\MissingParameterException;
@@ -9,14 +11,14 @@ class Validator
     /**
      * @var array
      */
-    private $parameters = [];
+    private array $parameters = [];
 
     /**
      * @var array
      */
-    private $mandatoryParameters = [
+    private array $mandatoryParameters = [
         'platform',
-        'player'
+        'player',
     ];
 
     /**
@@ -43,7 +45,7 @@ class Validator
     /**
      * @return array
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }

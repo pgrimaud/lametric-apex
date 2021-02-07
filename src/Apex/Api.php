@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Apex;
 
 use Apex\Exception\{ConfigException, InternalErrorException, MissingParameterException};
@@ -17,12 +19,12 @@ class Api
     /**
      * @var array
      */
-    private $credentials;
+    private array $credentials = [];
 
     /**
      * @var Validator
      */
-    private $validator;
+    private Validator $validator;
 
     /**
      * Api constructor.
@@ -42,10 +44,11 @@ class Api
 
     /**
      * @return array
+     *
      * @throws InternalErrorException
      * @throws MissingParameterException
      */
-    public function fetchData()
+    public function fetchData(): array
     {
         $platform = self::PLATFORMS[$this->validator->getParameters()['platform']];
 
@@ -58,7 +61,7 @@ class Api
             $res    = $client->request('GET', $endpoint, [
                 'headers' => [
                     'TRN-Api-Key' => $this->credentials['api-key'],
-                ]
+                ],
             ]);
 
             $json = (string)$res->getBody();
@@ -73,10 +76,11 @@ class Api
     }
 
     /**
-     * @param $data
+     * @param object $data
+     *
      * @return array
      */
-    private function formatData($data)
+    private function formatData(object $data): array
     {
         $dataToReturn = [
             'name' => $data->data->metadata->platformUserHandle,

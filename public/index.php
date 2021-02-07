@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Apex\Api;
 use Apex\Response;
 use Apex\Validator;
@@ -15,7 +17,7 @@ try {
     $api  = new Api($validator);
     $data = $api->fetchData();
 
-    echo $response->returnData($validator, $data);
+    echo $response->returnData($data);
 } catch (Exception $e) {
     echo $response->returnError($e->getMessage());
 }

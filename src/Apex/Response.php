@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Apex;
 
 class Response
@@ -15,45 +17,45 @@ class Response
     }
 
     /**
-     * @param null $text
+     * @param string|null $text
      * @return string
      */
-    public function returnError($text = null)
+    public function returnError(string|null $text = null): string
     {
         return $this->asJson([
             'frames' => [
                 [
                     'index' => 0,
                     'text'  => $text ?: 'Please check app configuration',
-                    'icon'  => self::ICON
-                ]
-            ]
+                    'icon'  => self::ICON,
+                ],
+            ],
         ]);
     }
 
-    /**
-     * @param Validator $validator
-     * @param           $data
+    /**s
+     * @param array $data
+     *
      * @return string
      */
-    public function returnData(Validator $validator, $data)
+    public function returnData(array $data): string
     {
         $frames['frames'][] = [
             'index' => 0,
             'text'  => $data['name'],
-            'icon'  => self::ICON
+            'icon'  => self::ICON,
         ];
 
         $frames['frames'][] = [
             'index' => 1,
             'text'  => $data['level'],
-            'icon'  => self::ICON
+            'icon'  => self::ICON,
         ];
 
         $frames['frames'][] = [
             'index' => 2,
             'text'  => $data['kills'],
-            'icon'  => self::ICON
+            'icon'  => self::ICON,
         ];
 
         $i = 2;
@@ -63,7 +65,7 @@ class Response
                 $frames['frames'][] = [
                     'index' => ++$i,
                     'text'  => $data[$stat],
-                    'icon'  => self::ICON
+                    'icon'  => self::ICON,
                 ];
             }
         }
@@ -74,10 +76,11 @@ class Response
 
     /**
      * @param array $data
+     *
      * @return string
      */
-    public function asJson($data = [])
+    public function asJson(array $data = []): string
     {
-        return json_encode($data, JSON_PRETTY_PRINT);
+        return json_encode($data);
     }
 }
