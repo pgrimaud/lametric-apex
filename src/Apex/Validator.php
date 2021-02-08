@@ -33,7 +33,7 @@ class Validator
     /**
      * @throws MissingParameterException
      */
-    public function check()
+    public function check(): void
     {
         foreach ($this->mandatoryParameters as $parameter) {
             if (empty($this->parameters[$parameter])) {

@@ -7,6 +7,9 @@ use Apex\Response;
 use Apex\Validator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+$config = require_once __DIR__ . '/../config/parameters.php';
+
+Sentry\init(['dsn' => $config['sentry_key']]);
 
 $response = new Response();
 

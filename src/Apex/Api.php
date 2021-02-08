@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Apex;
 
-use Apex\Exception\{ConfigException, InternalErrorException, MissingParameterException};
+use Apex\Exception\{InternalErrorException, MissingParameterException};
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -17,9 +17,9 @@ class Api
     ];
 
     /**
-     * @var array
+     * @var string
      */
-    private array $credentials = [];
+    private string $apiKey;
 
     /**
      * @var Validator
@@ -27,18 +27,12 @@ class Api
     private Validator $validator;
 
     /**
-     * Api constructor.
      * @param Validator $validator
-     * @throws ConfigException
+     * @param string $apiKey
      */
-    public function __construct(Validator $validator)
+    public function __construct(Validator $validator, string $apiKey)
     {
-        if (!is_file(__DIR__ . '/../../config/credentials.php')) {
-            throw new ConfigException('Internal error: missing config file');
-        } else {
-            $this->credentials = require __DIR__ . '/../../config/credentials.php';
-        }
-
+        $this->apiKey    = $apiKey;
         $this->validator = $validator;
     }
 
@@ -60,7 +54,7 @@ class Api
             $client = new Client();
             $res    = $client->request('GET', $endpoint, [
                 'headers' => [
-                    'TRN-Api-Key' => $this->credentials['api-key'],
+                    'TRN-Api-Key' => $this->apiKey,
                 ],
             ]);
 
