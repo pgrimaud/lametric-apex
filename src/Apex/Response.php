@@ -52,13 +52,16 @@ class Response
             'icon'  => self::ICON,
         ];
 
-        $frames['frames'][] = [
-            'index' => 2,
-            'text'  => $data['kills'],
-            'icon'  => self::ICON,
-        ];
+        $i = 1;
 
-        $i = 2;
+        if (isset($data['kills'])) {
+            $frames['frames'][] = [
+                'index' => 2,
+                'text'  => $data['kills'],
+                'icon'  => self::ICON,
+            ];
+            $i++;
+        }
 
         foreach (['headshots', 'damage', 'rank score'] as $stat) {
             if (isset($data[$stat])) {
